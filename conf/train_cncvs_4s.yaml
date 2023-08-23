@@ -1,0 +1,117 @@
+code_root_dir: /work101/cchen/code/baseline/
+data_root_dir: /work101/cchen/data/CNVSRC/
+
+checkpoint:
+  save_top_k: 75
+data:
+  modality: video
+  use_audio_normalise: false
+  max_frames: 1000
+  max_frames_val: 100
+  dataset:
+    root: ${data_root_dir}
+    label_dir: cncvs/
+    train_file: train.csv
+    val_file: valid.csv
+    test_file: test.csv
+  max_length: 100
+logger:
+  _target_: pytorch_lightning.loggers.WandbLogger
+  log_model: true
+  name: ${exp_name}
+  offline: false
+  project: auto_avsr
+  mode: online
+  entity: null
+model:
+  visual_backbone:
+    adim: 768
+    aheads: 12
+    eunits: 3072
+    elayers: 12
+    transformer_input_layer: conv3d
+    dropout_rate: 0.1
+    transformer_attn_dropout_rate: 0.1
+    transformer_encoder_attn_layer_type: rel_mha
+    macaron_style: true
+    use_cnn_module: true
+    cnn_module_kernel: 31
+    zero_triu: false
+    a_upsample_ratio: 1
+    relu_type: swish
+    ddim: 768
+    dheads: 12
+    dunits: 3072
+    dlayers: 6
+    lsm_weight: 0.1
+    transformer_length_normalized_loss: false
+    mtlalpha: 0.1
+    ctc_type: builtin
+    rel_pos_type: latest
+  audio_backbone:
+    adim: 768
+    aheads: 12
+    eunits: 3072
+    elayers: 12
+    transformer_input_layer: conv1d
+    dropout_rate: 0.1
+    transformer_attn_dropout_rate: 0.1
+    transformer_encoder_attn_layer_type: rel_mha
+    macaron_style: true
+    use_cnn_module: true
+    cnn_module_kernel: 31
+    zero_triu: false
+    a_upsample_ratio: 1
+    relu_type: swish
+    ddim: 768
+    dheads: 12
+    dunits: 3072
+    dlayers: 6
+    lsm_weight: 0.1
+    transformer_length_normalized_loss: false
+    mtlalpha: 0.1
+    ctc_type: builtin
+    rel_pos_type: latest
+  language_model:
+    pos_enc: none
+    embed_unit: 128
+    att_unit: 512
+    head: 8
+    unit: 2048
+    layer: 16
+    dropout_rate: 0.0
+optimizer:
+  name: adamw
+  lr: 0.0002
+  warmup_epochs: 5
+  weight_decay: 0.03
+  betas:
+  - 0.9
+  - 0.98
+trainer:
+  precision: 32
+  max_epochs: 75
+  num_nodes: 1
+  gpus: -1
+  sync_batchnorm: true
+  default_root_dir: auto_avsr/
+  num_sanity_val_steps: 0
+  limit_val_batches: 1.0
+  accumulate_grad_batches: 1
+  gradient_clip_val: 5.0
+  replace_sampler_ddp: false
+  resume_from_checkpoint: null
+decode:
+  name: default
+  snr_target: 999999
+
+exp_dir: ${code_root_dir}/exp/
+exp_name: cncvs_4s/
+num_workers: 8
+gpus: 1
+slurm_job_id: 1
+train: true
+log_wandb: false
+infer_path: null
+ckpt_path: null
+transfer_frontend: null
