@@ -11,9 +11,10 @@ The code in this repository is based on the SOTA method [mpc001/auto_avsr](https
 1. Clone the repository and navigate to it:
 
 ```Shell
-git clone git@github.com:sectum1919/auto_avsr.git baseline
-cd baseline
-git checkout baseline
+git clone git@github.com:MKT-Dataoceanai/CNVSRC2023Baseline.git
+cd CNVSRC2023Baseline
+git submodule init
+git submodule update
 ```
 
 2. Set up the environment:
