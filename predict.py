@@ -1,6 +1,7 @@
 import logging
 import os
 
+from pathlib import Path
 import hydra
 import torch
 from avg_ckpts import ensemble
@@ -95,11 +96,13 @@ def filelist(listcsv, text_transform, cfg):
         uid = os.path.basename(vfn)[:-4]
         fn = f"{root}/{vfn.replace('//', '/')}"
         uid2content[uid] = text_transform.post_process([int(t) for t in tokens.split(' ')])
-        fns.append((fn,uid))
+        if os.path.exists(fn):
+            fns.append((fn,uid))
+        print(fn)
     return fns, uid2content
         
 
-@hydra.main(config_path="conf", config_name="test_multi-speaker")
+@hydra.main(config_path="conf", config_name="test_single-speaker")
 def main(cfg):
     if not os.path.exists(cfg.data_root_dir):
         print('cfg.data_root_dir doesn\'t exist!')
@@ -120,8 +123,6 @@ def main(cfg):
     token_list = text_transform.token_list
     model = E2E(len(token_list), cfg.model.visual_backbone).to(device)
     infer_path = cfg.infer_path
-    from pathlib import Path
-    import os
     Path(os.path.dirname(infer_path)).mkdir(exist_ok=True, parents=True)
     if cfg.infer_ckpt_path.endswith('pth'):
         model.load_state_dict(

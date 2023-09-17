@@ -1,3 +1,9 @@
 [submodule "tools/fairseq"]
 	path = tools/fairseq
 	url = git@github.com:facebookresearch/fairseq.git
+[submodule "tools/face_alignment"]
+	path = tools/face_alignment
+	url = git@github.com:sectum1919/face_alignment.git
+[submodule "tools/face_detection"]
+	path = tools/face_detection
+	url = git@github.com:sectum1919/face_detection.git
