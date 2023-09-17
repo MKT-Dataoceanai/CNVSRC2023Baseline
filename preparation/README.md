@@ -4,9 +4,11 @@ Please follow the steps below to download and preprocess the data.
 
 1. Download the required dataset from the CNVSRC2023 website.
 
-2. Download the corresponding facial landmark files from the CNVSRC2023 website.
+2. Modify the data paths in `run.sh` and execute `sh run.sh`.
 
-3. Modify the data paths in `run.sh` and execute `sh run.sh`.
+## Process the downloaded `tar.gz` files
+
+
 
 ```bash
 python crop_lip_video.py \

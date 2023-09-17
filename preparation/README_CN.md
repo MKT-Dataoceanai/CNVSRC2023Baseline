@@ -5,33 +5,87 @@
 
 1. 从挑战赛官网下载所需数据集。
 
-2. 从挑战赛官网下载数据集对应的人脸特征点文件。
+2. 修改`run.sh`中的数据路径，并执行`sh run.sh`
 
-3. 修改`run.sh`中的数据路径，并执行`sh run.sh`
+## 如何处理下载得到的压缩文件
+
+我们默认您将下载得到的压缩文件按照以下文件夹结构放置：
+```
+CNVSRC/
+└── CNVSRC2023
+    ├── cncvs
+    ├── cnvsrc2023-ms-record-dev.tar.gz
+    ├── cnvsrc2023-ms-vlog-dev.tar.gz
+    └── cnvsrc2023-ss-dev.tar.gz
+```
+
+请首先对所有压缩包执行解压缩命令`# tar -xzvf ${filename}tar.gz`，解压全部压缩包后，您将得到以下目录：
+
+```
+CNVSRC/
+└── CNVSRC2023/
+    ├── cncvs
+    ├── cnvsrc2023-ms-record-dev.tar.gz
+    ├── cnvsrc2023-ms-vlog-dev.tar.gz
+    ├── cnvsrc2023-ss-dev.tar.gz
+    ├── ms-record/
+    ├── ms-vlog/
+    └── single-speaker/
+```
+
+此时请通过以下命令，将`ms-record`和`ms-vlog`合并到一起：
+```
+# mkdir -p CNVSRC/CNVSRC2023/multi-speaker/
+# cp -r CNVSRC/CNVSRC2023/ms-record/dev/ CNVSRC/CNVSRC2023/multi-speaker/
+# cp -r CNVSRC/CNVSRC2023/ms-vlog/dev/ CNVSRC/CNVSRC2023/multi-speaker/
+```
+
+最终，您得到的目录将为：
+
+```
+CNVSRC/
+└── CNVSRC2023/
+    ├── cncvs/
+    ├── cnvsrc2023-ms-record-dev.tar.gz
+    ├── cnvsrc2023-ms-vlog-dev.tar.gz
+    ├── cnvsrc2023-ss-dev.tar.gz
+    ├── ms-record/
+    ├── ms-vlog/
+    ├── multi-speaker/
+    └── single-speaker/
+```
+
+Tips: 在竞赛的后期会开放下载评测集，对于下载得到评测集：
+```
+CNVSRC/
+└── CNVSRC2023
+    ├── cnvsrc2023-ms-record-eval.tar.gz
+    ├── cnvsrc2023-ms-vlog-eval.tar.gz
+    └── cnvsrc2023-ss-eval.tar.gz
+```
+所有的解压缩和合并操作均与上述的开发集相同
+
+## 如何运行`run.sh`
+
+`run.sh`的重点在于合理地调用`prepare_filescp.py`和`detect_landmark_list.py`:
 
 ```Shell
-python crop_lip_video.py \
-    --src $DOWNLOAD_DATA_PATH \
-    --dst $TARGET_DATA_PATH \
-    --csv $CODE_ROOT_PATH/data/$DATASET_NAME/$SPLIT.csv \
-    --landmarks $DOWNLOAD_LANDMARK_PATH \
-    --worker 8
+python prepare_filescp.py --src $DOWNLOAD_DATA_PATH --dst $TARGET_DATA_PATH
+python detect_landmark_list.py --list $DATASET_NAME.scp --rank 0 --shard 1
 ```
-`crop_lip_video.py`所需的参数含义为：
-- `src`: 下载并解压后的数据集文件夹路径。
-- `dst`: 目标存储路径，**不得与`src`相同**，处理后其将会与src具有相同的目录结构。
-- `csv`: 包含要处理的视频的路径和其他信息，参照[../data/multi-speaker/train.csv](../data/multi-speaker/train.csv)及[README](../README.md)中的介绍。
-- `landmarks`: 下载并解压后的人脸特征点文件夹路径。
-- `worker`: 多线程处理所用的线程数量。
+
+其中`prepare_filescp.py`会根据下载好的数据集路径，以及设置好的目标路径，生成第二步所需的scp列表文件。
+
+而`detect_landmark_list.py`则将根据scp列表文件检测并抽取口唇部位的视频。
 
 您可以通过修改bash文件中的参数来运行：
 
-- `DOWNLOAD_DATA_PATH`: 已下载并解压的的数据集路径。
-- `TARGET_DATA_PATH`: 目标路径，已提取出的视频数据将会储存在目标路径下，其目录结构与`$DOWNLOAD_DATA_PATH`保持一致。
-- `CODE_ROOT_PATH`: 本代码库的路径。
+- `DOWNLOAD_DATA_PATH`: 已下载并解压的的数据集路径，按照上述的解压方式时应为`CNVSRC/CNVSRC2023/`
+- `TARGET_DATA_PATH`: 目标路径，已提取出的视频数据将会储存在目标路径下，其目录结构与`$DOWNLOAD_DATA_PATH`保持一致，推荐使用`CNVSRC/CNVSRC2023_lips/`。
 - `DATASET_NAME`: 想要处理的数据集的名字，`cncvs` / `multi-speaker` / `single-speaker`
 - `SPLIT`: 想要处理的数据集划分，`train` / `valid`
-- `DOWNLOAD_LANDMARK_PATH`: 下载并解压后的人脸特征点文件夹路径。
+- `CODE_ROOT_PATH`: 本代码库的路径，如果您在本目录下直接执行此bash文件则不需要改动。
+
 
 # 使用相同方式处理其他数据集
 

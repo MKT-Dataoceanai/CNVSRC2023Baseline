@@ -27,6 +27,12 @@ conda install pytorch-lightning==1.9.3 pytorch==2.0.1 torchaudio==2.0.2 torchvis
 # install fairseq
 cd tools/fairseq/
 pip install --editable .
+# install face_alignment
+cd ../face_alignment/
+pip install --editable .
+# install face_detection
+cd ../face_detection/
+pip install --editable .
 # install other dependence
 cd ../../
 pip install -r reqs.txt
