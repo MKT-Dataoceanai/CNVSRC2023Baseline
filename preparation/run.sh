@@ -10,8 +10,8 @@
 # SPLIT='valid'
 DOWNLOAD_DATA_PATH='/work1/cchen/data/audio-visual/CNVSRC/CNVSRC2023/'
 TARGET_DATA_PATH='/work1/cchen/data/audio-visual/CNVSRC/CNVSRC2023_lips/'
-DATASET_NAME='single-speaker'
-SPLIT='test'
+DATASET_NAME='multi-speaker'
+SPLIT='valid'
 CODE_ROOT_PATH=$(dirname "$PWD")
 
 
@@ -32,6 +32,10 @@ echo "SPLIT is not set!"
 exit 0
 fi
 
-python prepare_filescp.py --src $DOWNLOAD_DATA_PATH --dst $TARGET_DATA_PATH
+python prepare_filescp.py \
+    --src $DOWNLOAD_DATA_PATH \
+    --dst $TARGET_DATA_PATH \
+    --dataset $DATASET_NAME \
+    --split $SPLIT
 
-python detect_landmark_list.py --list $DATASET_NAME.scp --rank 0 --shard 1
+python detect_landmark_list.py --list $DATASET_NAME-$SPLIT.scp --rank 0 --shard 1

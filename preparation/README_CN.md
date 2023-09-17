@@ -14,12 +14,43 @@
 CNVSRC/
 └── CNVSRC2023
     ├── cncvs
+    |   ├── news
+    |   |   ├── news_part01.tar.gz
+    |   |   └── news_part02.tar.gz
+    |   └── speech
+    |       ├── speech_part01.tar.gz
+    |       ├── ...
+    |       └── speech_part12.tar.gz
     ├── cnvsrc2023-ms-record-dev.tar.gz
     ├── cnvsrc2023-ms-vlog-dev.tar.gz
     └── cnvsrc2023-ss-dev.tar.gz
 ```
 
-请首先对所有压缩包执行解压缩命令`# tar -xzvf ${filename}tar.gz`，解压全部压缩包后，您将得到以下目录：
+请首先对所有压缩包执行解压缩命令
+``` Shell
+# cd cncvs/news/
+# tar -xzvf news_part01.tar.gz
+# tar -xzvf news_part02.tar.gz
+# cd ../speech/
+# tar -xzvf speech_part01.tar.gz
+# tar -xzvf speech_part02.tar.gz
+# tar -xzvf speech_part03.tar.gz
+# tar -xzvf speech_part04.tar.gz
+# tar -xzvf speech_part05.tar.gz
+# tar -xzvf speech_part06.tar.gz
+# tar -xzvf speech_part07.tar.gz
+# tar -xzvf speech_part08.tar.gz
+# tar -xzvf speech_part09.tar.gz
+# tar -xzvf speech_part10.tar.gz
+# tar -xzvf speech_part11.tar.gz
+# tar -xzvf speech_part12.tar.gz
+# cd ../../
+# tar -xzvf  cnvsrc2023-ms-record-dev.tar.gz --strip-components 7
+# tar -xzvf  cnvsrc2023-ms-vlog-dev.tar.gz --strip-components 7
+# tar -xzvf  cnvsrc2023-ss-dev.tar.gz --strip-components 7
+
+```
+解压全部压缩包后，您将得到以下目录：
 
 ```
 CNVSRC/
@@ -70,8 +101,13 @@ CNVSRC/
 `run.sh`的重点在于合理地调用`prepare_filescp.py`和`detect_landmark_list.py`:
 
 ```Shell
-python prepare_filescp.py --src $DOWNLOAD_DATA_PATH --dst $TARGET_DATA_PATH
-python detect_landmark_list.py --list $DATASET_NAME.scp --rank 0 --shard 1
+python prepare_filescp.py \
+    --src $DOWNLOAD_DATA_PATH \
+    --dst $TARGET_DATA_PATH \
+    --dataset $DATASET_NAME \
+    --split $SPLIT
+
+python detect_landmark_list.py --list $DATASET_NAME-$SPLIT.scp --rank 0 --shard 1
 ```
 
 其中`prepare_filescp.py`会根据下载好的数据集路径，以及设置好的目标路径，生成第二步所需的scp列表文件。
