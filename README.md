@@ -13,9 +13,19 @@ The code in this repository is based on the SOTA method [mpc001/auto_avsr](https
 ```Shell
 git clone git@github.com:MKT-Dataoceanai/CNVSRC2023Baseline.git
 cd CNVSRC2023Baseline
-git submodule init
 git submodule update
+git submodule init
+cd tools/face_detection
+git lfs pull
+cd ../../
 ```
+
+If you don't have git-lfs installed, Please go to [here](https://github.com/sectum1919/face_detection/tree/ec0d6be271871f4ec551d82c2b6c55779d9d60db/ibug/face_detection/retina_face/weights) to download the model file and put it into `CNVSRC2023Baseline/tools/face_detection/ibug/face_detection/retina_face/weights/`
+
+|       Model name      |             md5sum             |
+|-----------------------|--------------------------------|
+|Resnet50_Final.pth     |bce939bc22d8cec91229716dd932e56e|
+|mobilenet0.25_Final.pth|d308262876f997c63f79c7805b2cdab0|
 
 2. Set up the environment:
 

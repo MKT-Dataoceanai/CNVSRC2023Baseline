@@ -10,14 +10,15 @@ def prepare_cncvs_scp(cncvs_rootdir, dst):
     filelist = []
     for split in os.listdir(cncvs_rootdir):
         for spk in os.listdir(f"{cncvs_rootdir}/{split}"):
-            src_dir = os.path.join(cncvs_rootdir, split, spk, 'video')
-            dst_dir = os.path.join(dst, split, spk, 'video')
-            landmark_dir = os.path.join(dst, 'facelandmark')
-            for fn in os.listdir(src_dir):
-                vfn = fn[:-4]
-                filelist.append(f"{vfn}\t{src_dir}\t{dst_dir}\t{landmark_dir}")
+            if os.path.isdir(f"{cncvs_rootdir}/{split}/{spk}"):
+                src_dir = os.path.join(cncvs_rootdir, split, spk, 'video')
+                dst_dir = os.path.join(dst, split, spk, 'video')
+                landmark_dir = os.path.join(dst, 'facelandmark')
+                for fn in os.listdir(src_dir):
+                    vfn = fn[:-4]
+                    filelist.append(f"{vfn}\t{src_dir}\t{dst_dir}\t{landmark_dir}")
     random.shuffle(filelist)
-    with open('cncvs.scp', 'w') as fp:
+    with open(f'cncvs-{split}.scp', 'w') as fp:
         fp.write('\n'.join(filelist))
         
 def prepare_ss_scp(single_speaker_rootdir, dst, split):

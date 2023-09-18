@@ -1,5 +1,5 @@
-code_root_dir: /work1/cchen/CNVSRC2023Baseline/
-data_root_dir: /work1/cchen/data/CNVSRC/audio-visual/CNVSRC2023_lips/
+code_root_dir: 
+data_root_dir: 
 
 checkpoint:
   save_top_k: 40
@@ -117,5 +117,5 @@ ckpt_path: ${code_root_dir}/pretrained_models/model_avg_last5_cncvs_single-speak
 transfer_frontend: false
 remove_ctc: false
 infer_ckpt_path: ${code_root_dir}/pretrained_models/model_avg_last5_cncvs_single-speaker.pth
-filelist_csv: ${code_root_dir}/data/single-speaker/test.csv
+filelist_csv: ${code_root_dir}/data/single-speaker/valid.csv
 device: 'cuda:0'

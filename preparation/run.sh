@@ -1,17 +1,13 @@
 # fill the blank and run
-# DOWNLOAD_DATA_PATH=
-# TARGET_DATA_PATH=
-# DATASET_NAME=
-# SPLIT=
+DOWNLOAD_DATA_PATH=
+TARGET_DATA_PATH=
+DATASET_NAME=
+SPLIT=
 # for example:
 # DOWNLOAD_DATA_PATH='/data/CNVSRC/'
 # TARGET_DATA_PATH='/data/CNVSRC_lips/'
 # DATASET_NAME='multi-speaker'
 # SPLIT='valid'
-DOWNLOAD_DATA_PATH='/work1/cchen/data/audio-visual/CNVSRC/CNVSRC2023/'
-TARGET_DATA_PATH='/work1/cchen/data/audio-visual/CNVSRC/CNVSRC2023_lips/'
-DATASET_NAME='multi-speaker'
-SPLIT='valid'
 CODE_ROOT_PATH=$(dirname "$PWD")
 
 
