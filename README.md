@@ -13,8 +13,8 @@ The code in this repository is based on the SOTA method [mpc001/auto_avsr](https
 ```Shell
 git clone git@github.com:MKT-Dataoceanai/CNVSRC2023Baseline.git
 cd CNVSRC2023Baseline
-git submodule update
 git submodule init
+git submodule update
 cd tools/face_detection
 git lfs pull
 cd ../../
