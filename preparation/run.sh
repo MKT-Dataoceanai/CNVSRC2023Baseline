@@ -4,9 +4,9 @@ TARGET_DATA_PATH=
 DATASET_NAME=
 SPLIT=
 # for example:
-# DOWNLOAD_DATA_PATH='/data/CNVSRC/'
-# TARGET_DATA_PATH='/data/CNVSRC_lips/'
-# DATASET_NAME='multi-speaker'
+# DOWNLOAD_DATA_PATH='/data/CNVSRC/CNVSRC2023/'
+# TARGET_DATA_PATH='/data/CNVSRC/CNVSRC2023_lips/'
+# DATASET_NAME='cnvsrc-single'
 # SPLIT='valid'
 CODE_ROOT_PATH=$(dirname "$PWD")
 

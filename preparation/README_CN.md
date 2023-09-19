@@ -21,9 +21,8 @@ CNVSRC/
     |       ├── speech_part01.tar.gz
     |       ├── ...
     |       └── speech_part12.tar.gz
-    ├── cnvsrc2023-ms-record-dev.tar.gz
-    ├── cnvsrc2023-ms-vlog-dev.tar.gz
-    └── cnvsrc2023-ss-dev.tar.gz
+    ├── cnvsrc-multi-dev.tar.gz
+    └── cnvsrc-single-dev.tar.gz
 ```
 
 请首先对所有压缩包执行解压缩命令
@@ -46,9 +45,8 @@ CNVSRC/
 # tar -xzvf speech_part11.tar.gz
 # tar -xzvf speech_part12.tar.gz
 # cd ../../
-# tar -xzvf  cnvsrc2023-ms-record-dev.tar.gz --strip-components 7
-# tar -xzvf  cnvsrc2023-ms-vlog-dev.tar.gz --strip-components 7
-# tar -xzvf  cnvsrc2023-ss-dev.tar.gz --strip-components 7
+# tar -xzvf cnvsrc-multi-dev.tar.gz
+# tar -xzvf cnvsrc-single-dev.tar.gz
 
 ```
 解压全部压缩包后，您将得到以下目录：
@@ -65,60 +63,73 @@ CNVSRC/
     |       ├── s00001/
     |       ├── ...
     |       └── s02529/
-    ├── cnvsrc2023-ms-record-dev.tar.gz
-    ├── cnvsrc2023-ms-vlog-dev.tar.gz
-    ├── cnvsrc2023-ss-dev.tar.gz
-    ├── ms-record/
+    ├── cnvsrc-multi/
+    │   ├── cnvsrc-multi-dev-infos.json
+    │   ├── README.TXT
     |   └── dev/
     |       ├── audio/
     |       └── video/
-    ├── ms-vlog/
+    ├── cnvsrc-multi-dev.tar.gz
+    ├── cnvsrc-single/
+    |   ├── cnvsrc-single-dev-infos.json
+    |   ├── README.TXT
     |   └── dev/
     |       ├── audio/
     |       └── video/
-    └── single-speaker/
-        └── dev/
-            ├── audio/
-            └── video/
-```
-
-此时请通过以下命令，将`ms-record`和`ms-vlog`合并到一起：
-```
-# mkdir -p CNVSRC/CNVSRC2023/multi-speaker/
-# cp -r CNVSRC/CNVSRC2023/ms-record/dev/ CNVSRC/CNVSRC2023/multi-speaker/
-# cp -r CNVSRC/CNVSRC2023/ms-vlog/dev/ CNVSRC/CNVSRC2023/multi-speaker/
-```
-
-最终，您得到的目录将为：
-
-```
-CNVSRC/
-└── CNVSRC2023/
-    ├── cncvs/
-    ├── cnvsrc2023-ms-record-dev.tar.gz
-    ├── cnvsrc2023-ms-vlog-dev.tar.gz
-    ├── cnvsrc2023-ss-dev.tar.gz
-    ├── ms-record/
-    ├── ms-vlog/
-    ├── multi-speaker/
-    └── single-speaker/
+    └── cnvsrc-single-dev.tar.gz
 ```
 
 Tips: 在竞赛的后期会开放下载评测集，对于下载得到评测集：
 ```
 CNVSRC/
 └── CNVSRC2023
-    ├── cnvsrc2023-ms-record-eval.tar.gz
-    ├── cnvsrc2023-ms-vlog-eval.tar.gz
-    └── cnvsrc2023-ss-eval.tar.gz
+    ├── cnvsrc-multi-eval.tar.gz
+    └── cnvsrc-single-eval.tar.gz
 ```
-所有的解压缩和合并操作均与上述的开发集相同
+所有的解压缩操作均与上述的开发集相同，即：
 
 ``` Shell
 # cd CNVSRC/CNVSRC2023/
-# tar -xzvf cnvsrc2023-ms-record-eval.tar.gz --strip-components 7
-# tar -xzvf cnvsrc2023-ms-vlog-eval.tar.gz --strip-components 7
-# tar -xzvf cnvsrc2023-ss-eval.tar.gz --strip-components 7
+# tar -xzvf cnvsrc-multi-eval.tar.gz
+# tar -xzvf cnvsrc-single-eval.tar.gz
+```
+
+此时将得到以下目录结构：
+
+```
+CNVSRC/
+└── CNVSRC2023/
+    ├── cncvs/
+    |   ├── news/
+    |   |   ├── n001/
+    |   |   ├── ...
+    |   |   └── n028/
+    |   └── speech/
+    |       ├── s00001/
+    |       ├── ...
+    |       └── s02529/
+    ├── cnvsrc-multi/
+    │   ├── cnvsrc-multi-dev-infos.json
+    |   ├── cnvsrc-multi-eval-infos.json
+    │   ├── README.TXT
+    |   ├── dev/
+    |   |   ├── audio/
+    |   |   └── video/
+    |   └── eval/
+    |       └── video/
+    ├── cnvsrc-multi-dev.tar.gz
+    ├── cnvsrc-multi-eval.tar.gz
+    ├── cnvsrc-single/
+    |   ├── cnvsrc-single-dev-infos.json
+    |   ├── cnvsrc-single-eval-infos.json
+    |   ├── README.TXT
+    |   ├── dev/
+    |   |   ├── audio/
+    |   |   └── video/
+    |   └── eval/
+    |       └── video/
+    ├── cnvsrc-single-dev.tar.gz
+    └── cnvsrc-single-eval.tar.gz
 ```
 
 ## 如何运行`run.sh`

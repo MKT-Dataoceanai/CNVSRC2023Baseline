@@ -102,7 +102,7 @@ def filelist(listcsv, text_transform, cfg):
     return fns, uid2content
         
 
-@hydra.main(config_path="conf", config_name="test_single-speaker")
+@hydra.main(config_path="conf", config_name="test_cnvsrc-single")
 def main(cfg):
     if not os.path.exists(cfg.data_root_dir):
         print('cfg.data_root_dir doesn\'t exist!')

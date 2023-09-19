@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository is the baseline code for CNVSRC2023 (CN-CVS Visual Speech Recognition Challenge 2023).
+This repository is the baseline code for CNVSRC2023 (Chinese Continuous Visual Speech Recognition Challenge 2023).
 
 The code in this repository is based on the SOTA method [mpc001/auto_avsr](https://github.com/mpc001/auto_avsr) on the LRS3 dataset. We have added some configuration files to run this code on CN-CVS and the datasets provided in this challenge. Additionally, we have removed some code that is not needed for running this baseline and modified the implementation of some functionalities.
 
@@ -142,12 +142,12 @@ The table below contains CER on the validset of their own task.
 
 Download model files from [huggingface](https://huggingface.co/DataOceanAI/CNVSRC2023Baseline) or [modelscope](https://www.modelscope.cn/speechoceanadmin/CNVSRC2023Baseline)。
 
-|       Training Data       |   CER  | File Name                                |
-|:-------------------------:|:------:|:-----------------------------------------|
-| CN-CVS (<4s)              |   /    | model_avg_14_23_cncvs_4s.pth             |
-| CN-CVS (full)             |   /    | model_avg_last10_cncvs_4s_30s.pth        |
-| CN-CVS + Multi-speaker    | 58.42% | model_avg_last5_cncvs_multi-speaker.pth  |
-| CN-CVS + Single-speaker   | 46.01% | model_avg_last5_cncvs_single-speaker.pth |
+|          Task         |       Training Data           | CER on Dev | CER on Eval | File Name                                |
+|:---------------------:|:-----------------------------:|:----------:|:-----------:|:-----------------------------------------|
+|     Pre-train         | CN-CVS (<4s)                  |     /      |      /      | model_avg_14_23_cncvs_4s.pth             |
+|     Pre-train         | CN-CVS (full)                 |     /      |      /      | model_avg_last10_cncvs_4s_30s.pth        |
+|Single-speaker VSR (T1)| CN-CVS + CNVSRC-Single.Dev    |   48.57%   |    48.60%   | model_avg_last5_cncvs_cnvsrc-single.pth  |
+|Multi-speaker VSR (T2) | CN-CVS + CNVSRC-Multi.Dev     |   58.77%   |    58.37%   | model_avg_last5_cncvs_cnvsrc-multi.pth   |
 
 ## License
 

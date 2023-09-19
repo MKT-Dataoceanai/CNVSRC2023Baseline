@@ -20,9 +20,8 @@ CNVSRC/
     |       ├── speech_part01.tar.gz
     |       ├── ...
     |       └── speech_part12.tar.gz
-    ├── cnvsrc2023-ms-record-dev.tar.gz
-    ├── cnvsrc2023-ms-vlog-dev.tar.gz
-    └── cnvsrc2023-ss-dev.tar.gz
+    ├── cnvsrc-multi-dev.tar.gz
+    └── cnvsrc-single-dev.tar.gz
 ```
 
 First, please execute the decompress command for all packages:
@@ -46,9 +45,8 @@ First, please execute the decompress command for all packages:
 # tar -xzvf speech_part11.tar.gz
 # tar -xzvf speech_part12.tar.gz
 # cd ../../
-# tar -xzvf cnvsrc2023-ms-record-dev.tar.gz --strip-components 7
-# tar -xzvf cnvsrc2023-ms-vlog-dev.tar.gz --strip-components 7
-# tar -xzvf cnvsrc2023-ss-dev.tar.gz --strip-components 7
+# tar -xzvf cnvsrc-multi-dev.tar.gz
+# tar -xzvf cnvsrc-single-dev.tar.gz
 ```
 
 After extracting the packages, you will get the following directory:
@@ -65,62 +63,75 @@ CNVSRC/
     |       ├── s00001/
     |       ├── ...
     |       └── s02529/
-    ├── cnvsrc2023-ms-record-dev.tar.gz
-    ├── cnvsrc2023-ms-vlog-dev.tar.gz
-    ├── cnvsrc2023-ss-dev.tar.gz
-    ├── ms-record/
+    ├── cnvsrc-multi/
+    │   ├── cnvsrc-multi-dev-infos.json
+    │   ├── README.TXT
     |   └── dev/
     |       ├── audio/
     |       └── video/
-    ├── ms-vlog/
+    ├── cnvsrc-multi-dev.tar.gz
+    ├── cnvsrc-single/
+    |   ├── cnvsrc-single-dev-infos.json
+    |   ├── README.TXT
     |   └── dev/
     |       ├── audio/
     |       └── video/
-    └── single-speaker/
-        └── dev/
-            ├── audio/
-            └── video/
-```
-
-Then merge 'ms-record' and 'ms-vlog' with the following command:
-```Shell
-# mkdir -p CNVSRC/CNVSRC2023/multi-speaker/
-# cp -r CNVSRC/CNVSRC2023/ms-record/dev/ CNVSRC/CNVSRC2023/multi-speaker/
-# cp -r CNVSRC/CNVSRC2023/ms-vlog/dev/ CNVSRC/CNVSRC2023/multi-speaker/
-```
-
-Finally, you will get the following directory:
-```
-CNVSRC/
-└── CNVSRC2023/
-    ├── cncvs/
-    ├── cnvsrc2023-ms-record-dev.tar.gz
-    ├── cnvsrc2023-ms-vlog-dev.tar.gz
-    ├── cnvsrc2023-ss-dev.tar.gz
-    ├── ms-record/
-    ├── ms-vlog/
-    ├── multi-speaker/
-    └── single-speaker/
+    └── cnvsrc-single-dev.tar.gz
 ```
 
 Tips: Later the evaluation set will be available for download, for the downloaded evaluation set:
 ```
 CNVSRC/
 └── CNVSRC2023
-    ├── cnvsrc2023-ms-record-eval.tar.gz
-    ├── cnvsrc2023-ms-vlog-eval.tar.gz
-    └── cnvsrc2023-ss-eval.tar.gz
+    ├── cnvsrc-multi-eval.tar.gz
+    └── cnvsrc-single-eval.tar.gz
 ```
 
 All decompression and merge commands are the same as the dev set described above.
 
 ``` Shell
 # cd CNVSRC/CNVSRC2023/
-# tar -xzvf cnvsrc2023-ms-record-eval.tar.gz --strip-components 7
-# tar -xzvf cnvsrc2023-ms-vlog-eval.tar.gz --strip-components 7
-# tar -xzvf cnvsrc2023-ss-eval.tar.gz --strip-components 7
+# tar -xzvf cnvsrc-multi-eval.tar.gz
+# tar -xzvf cnvsrc-single-eval.tar.gz
 ```
 
+Finally, you will get the following directory:
+
+```
+CNVSRC/
+└── CNVSRC2023/
+    ├── cncvs/
+    |   ├── news/
+    |   |   ├── n001/
+    |   |   ├── ...
+    |   |   └── n028/
+    |   └── speech/
+    |       ├── s00001/
+    |       ├── ...
+    |       └── s02529/
+    ├── cnvsrc-multi/
+    │   ├── cnvsrc-multi-dev-infos.json
+    |   ├── cnvsrc-multi-eval-infos.json
+    │   ├── README.TXT
+    |   ├── dev/
+    |   |   ├── audio/
+    |   |   └── video/
+    |   └── eval/
+    |       └── video/
+    ├── cnvsrc-multi-dev.tar.gz
+    ├── cnvsrc-multi-eval.tar.gz
+    ├── cnvsrc-single/
+    |   ├── cnvsrc-single-dev-infos.json
+    |   ├── cnvsrc-single-eval-infos.json
+    |   ├── README.TXT
+    |   ├── dev/
+    |   |   ├── audio/
+    |   |   └── video/
+    |   └── eval/
+    |       └── video/
+    ├── cnvsrc-single-dev.tar.gz
+    └── cnvsrc-single-eval.tar.gz
+```
 
 ## How to run `run.sh`
 
@@ -148,7 +159,7 @@ You can run it by modifying the parameters in the bash file:
 - `SPLIT`: The dataset split to process, `train` / `valid`, this parameter has no effect when processing the `CNCVS` dataset. 
 - `CODE_ROOT_PATH`: The path to this code repository.
 
-Note: For the `cncvs` dataset, set the `SPLIT` to `train` to preprocess all data. There is no need to preprocess `valid` for `cncvs`.
+Note: For the `cncvs` dataset, set the `SPLIT` to `train` to preprocess **all** data. There is **no need** to preprocess `valid` for `cncvs`.
 
 # Preprocessing Other Datasets in the Same Way
 

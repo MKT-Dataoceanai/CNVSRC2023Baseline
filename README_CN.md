@@ -134,12 +134,12 @@ python main.py
 
 可以从 [huggingface](https://huggingface.co/DataOceanAI/CNVSRC2023Baseline) 或 [modelscope](https://www.modelscope.cn/speechoceanadmin/CNVSRC2023Baseline) 下载模型文件。
 
-|       Training Data       |   CER  | File Name                                |
-|:-------------------------:|:------:|:-----------------------------------------|
-| CN-CVS (<4s)              |   /    | model_avg_14_23_cncvs_4s.pth             |
-| CN-CVS (full)             |   /    | model_avg_last10_cncvs_4s_30s.pth        |
-| CN-CVS + Multi-speaker    | 58.42% | model_avg_last5_cncvs_multi-speaker.pth  |
-| CN-CVS + Single-speaker   | 46.01% | model_avg_last5_cncvs_single-speaker.pth |
+|          Task         |       Training Data           | CER on Dev | CER on Eval | File Name                                |
+|:---------------------:|:-----------------------------:|:----------:|:-----------:|:-----------------------------------------|
+|     Pre-train         | CN-CVS (<4s)                  |     /      |      /      | model_avg_14_23_cncvs_4s.pth             |
+|     Pre-train         | CN-CVS (full)                 |     /      |      /      | model_avg_last10_cncvs_4s_30s.pth        |
+|Single-speaker VSR (T1)| CN-CVS + CNVSRC-Single.Dev    |   48.57%   |    48.60%   | model_avg_last5_cncvs_cnvsrc-single.pth  |
+|Multi-speaker VSR (T2) | CN-CVS + CNVSRC-Multi.Dev     |   58.77%   |    58.37%   | model_avg_last5_cncvs_cnvsrc-multi.pth   |
 
 ## License
 
