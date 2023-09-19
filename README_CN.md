@@ -104,7 +104,7 @@ pip install -r reqs.txt
 
 ### 使用预训练模型进行微调
 
-配置文件[train_multi-speaker.yaml](conf/train_multi-speaker.yaml)给出了一个使用CN-CVS预训练模型进行微调的配置示例。
+配置文件[train_cnvsrc-multi.yaml](conf/train_cnvsrc-multi.yaml)给出了一个使用CN-CVS预训练模型进行微调的配置示例。
 
 配置文件中`ckpt_path`指定了预训练模型的路径。`remove_ctc`表示是否使用预训练模型的分类层。
 
