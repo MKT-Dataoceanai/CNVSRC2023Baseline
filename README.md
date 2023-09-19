@@ -138,7 +138,7 @@ We prefer using `predict.py` to observe the real-time output text.
 
 ## Model zoo
 
-The table below contains CER on their own task.
+The table below contains the CER performance of Models on their own task.
 
 Download model files from [huggingface](https://huggingface.co/DataOceanAI/CNVSRC2023Baseline) or [modelscope](https://www.modelscope.cn/speechoceanadmin/CNVSRC2023Baseline)。
 
